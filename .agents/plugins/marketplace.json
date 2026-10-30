@@ -1,0 +1,20 @@
+{
+  "name": "nanaki11-ai-agent-workspace",
+  "interface": {
+    "displayName": "ai-agent-workspace (nanaki11)"
+  },
+  "plugins": [
+    {
+      "name": "nanaki11-consulting-toolkit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/openai/nanaki11-consulting-toolkit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

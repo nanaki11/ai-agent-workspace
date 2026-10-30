@@ -10,7 +10,8 @@ import subprocess
 import sys
 import zipfile
 from pathlib import Path
-from lib_skills import ROOT, SKILLS_DIR, RULES_DIR, load_skills, load_claude_agents, strip_namespace
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from lib_skills import ROOT, SKILLS_DIR, RULES_DIR, load_skills, load_claude_agents, strip_namespace, read_version  # noqa: E402
 
 DIST = ROOT / 'dist' / 'chatgpt'
 NAME = 'nanaki11-consulting-toolkit'
@@ -46,14 +47,17 @@ def portable_manifest(legacy):
     return result
 
 
-def build(legacy_manifest=None):
-    subprocess.run([sys.executable, str(ROOT / 'scripts/generate.py'), '--check'], check=True)
-    out = DIST / NAME
+def build(legacy_manifest=None, dest=DIST, build_info=True, archive=True, precheck=True, quiet=False):
+    """dest/NAME にプラグインを作る。build_info=False は Git 管理用（コミット等の可変情報を入れない）。"""
+    if precheck:
+        subprocess.run([sys.executable, str(ROOT / 'scripts/generate.py'), '--check'], check=True)
+    version = read_version()
+    out = dest / NAME
     if out.exists():
         shutil.rmtree(out)
     (out / '.codex-plugin').mkdir(parents=True)
     manifest = {
-        'name': NAME, 'version': '1.1.0', 'skills': './skills/',
+        'name': NAME, 'version': version, 'skills': './skills/',
         'description': '21のコンサルティングスキルの全文・資源と4つの専門家役割。GitHubを正本とする。',
         'interface': {
             'displayName': 'Consulting Toolkit (nanaki11)',
@@ -62,7 +66,7 @@ def build(legacy_manifest=None):
             'category': 'Productivity', 'capabilities': ['Research', 'Analysis', 'Documents']}}
     if legacy_manifest is not None:
         manifest = copy.deepcopy(legacy_manifest)
-        manifest['version'] = '1.1.0'
+        manifest['version'] = version
     portable = portable_manifest(manifest)
     # Keep older clients consistent with the effective portable interface.
     manifest['interface'] = copy.deepcopy(portable['extensions']['com.openai'].get('interface', {}))
@@ -113,23 +117,28 @@ description: 戦略・業務改革・IT・PMOの依頼に主担当と必要な�
         sources[a['file'].relative_to(ROOT).as_posix()] = hashlib.sha256(a['file'].read_bytes()).hexdigest()
         names = ', '.join(strip_namespace(x) for x in a['meta'].get('skills', []))
         text += f"- [{name}](references/{a['file'].name}): {a['meta']['description']} 適用スキル: {names}\n"
-    (router / 'SKILL.md').write_text(text)
-    rev = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    dirty = bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=all'], cwd=ROOT, text=True).strip())
+    (router / 'SKILL.md').write_text(text, encoding='utf-8')
     inventory = {'repository': 'https://github.com/nanaki11/ai-agent-workspace',
-                 'source_commit': rev, 'working_tree_dirty': dirty,
-                 'sha256': sources,
+                 'version': version, 'sha256': sources,
                  'external_dependencies': [{'name': 'carnot-tech/consulting-pptx-skill',
                     'commit': '5d3b048e944f237c26690ed5f624d7773b302d96', 'bundled': False}]}
+    dirty = None
+    if build_info:
+        rev = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+        dirty = bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=all'], cwd=ROOT, text=True).strip())
+        inventory['source_commit'], inventory['working_tree_dirty'] = rev, dirty
     (out / 'SOURCE_MANIFEST.json').write_text(json.dumps(inventory, ensure_ascii=False, indent=2)+'\n')
-    archive = DIST / (NAME + '.zip')
-    with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as z:
+    if not archive:
+        return out
+    archive_path = dest / (NAME + '.zip')
+    with zipfile.ZipFile(archive_path, 'w', zipfile.ZIP_DEFLATED) as z:
         for f in sorted(out.rglob('*')):
             if f.is_file():
-                info = zipfile.ZipInfo(f.relative_to(DIST).as_posix(), (2026, 1, 1, 0, 0, 0))
+                info = zipfile.ZipInfo(f.relative_to(dest).as_posix(), (2026, 1, 1, 0, 0, 0))
                 info.compress_type = zipfile.ZIP_DEFLATED
                 z.writestr(info, f.read_bytes())
-    print(f'{archive.relative_to(ROOT)}: {len(load_skills())} full skills + router; dirty={dirty}')
+    if not quiet:
+        print(f'{archive_path.relative_to(ROOT)}: {len(load_skills())} full skills + router; version={version}; dirty={dirty}')
     return out
 
 if __name__ == '__main__':

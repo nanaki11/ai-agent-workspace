@@ -12,6 +12,23 @@ PACKAGES_JSON = CLAUDE_DIR / "packages.json"
 CLAUDE_AGENTS_DIR = CLAUDE_DIR / "plugins" / "consulting-agents" / "agents"
 CODEX_AGENTS_DIR = ROOT / ".codex" / "agents"
 RULES_DIR = ROOT / "common" / "rules"
+PLUGINS_DIR = ROOT / "plugins"          # 生成物（マーケットプレイス配布用。Git 管理）
+STATE_JSON = ROOT / "sync" / "state.json"
+VERSION_FILE = ROOT / "VERSION"
+STANDARD_NAME = "consulting-delivery-standard.md"
+STANDARD_HEADER = "<!-- Generated from common/rules/consulting-delivery-standard.md; do not edit. -->\n"
+EXCLUDE_PARTS = {"__pycache__", ".DS_Store"}
+
+
+def read_version() -> str:
+    return VERSION_FILE.read_text(encoding="utf-8").strip()
+
+
+def iter_files(base: Path):
+    """base 以下の通常ファイル（キャッシュ類を除く）を返す。"""
+    for f in sorted(base.rglob("*")):
+        if f.is_file() and not (set(f.relative_to(base).parts) & EXCLUDE_PARTS) and f.suffix != ".pyc":
+            yield f
 
 _FM = re.compile(r"\A---\n(.*?)\n---\n?(.*)\Z", re.S)
 

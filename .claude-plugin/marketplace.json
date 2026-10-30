@@ -1,0 +1,20 @@
+{
+  "name": "nanaki11-ai-agent-workspace",
+  "owner": {
+    "name": "hoshi"
+  },
+  "plugins": [
+    {
+      "name": "consulting-agents",
+      "source": "./plugins/claude/consulting-agents",
+      "description": "戦略コンサル・ビジネスコンサル・ITアーキテクト・PMOのエージェント4つと、共通／特化スキル20個（draw.io作図を含む）",
+      "version": "1.2.0"
+    },
+    {
+      "name": "consulting-pptx-skill",
+      "source": "./plugins/claude/consulting-pptx-skill",
+      "description": "コンサル品質・経営会議品質のスライド（HTML 16:9→PDF）を作る単体スキル",
+      "version": "1.2.0"
+    }
+  ]
+}

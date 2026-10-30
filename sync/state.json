@@ -1,0 +1,39 @@
+{
+  "targets": {
+    "claude": {
+      "commit": "f76229257a180fd002855f64897c3e9bef4a377e",
+      "files": {
+        ".agents/skills/bpm-process-mapping/SKILL.md": "5e4a238a255d66278bd2567d6c8306252d3f6e6ece31df635f48e97307f52b78",
+        ".agents/skills/business-plan/SKILL.md": "11401f165da9ef8eb96043078e663c14565d3eac750580b5b760d9f6d402cf10",
+        ".agents/skills/consulting-pptx-skill/SKILL.md": "7496ad3d262b10a6d485cb7bcda6c45f70d5a07c077127f653b95fe0f8b36dc9",
+        ".agents/skills/cutover-planning/SKILL.md": "746c83c988702d3e80ca61c3cc057c87a816705626097c2494f0b2a46bc001e2",
+        ".agents/skills/deliverable-review/SKILL.md": "a76f3775ad32a8ee6d75dedb551da5720e6d5935b3d19e9e8de21305a08786fd",
+        ".agents/skills/desk-research/SKILL.md": "5526a2771489066a023193041bf793ad742d9b892a5604c08cbc9d67001f1093",
+        ".agents/skills/drawio-diagram/SKILL.md": "8d3e052854e71e9705ee0caa6f512adaf53e557a948bda4d03aae6e9bde59c16",
+        ".agents/skills/drawio-diagram/examples/sample-system-overview.drawio": "f30bdbdf6bd9ad2f706b66c36f05a3e97bdba11bacca4800c1d63cf367df43de",
+        ".agents/skills/drawio-diagram/scripts/validate_drawio.py": "b1bfe73dde82f5f13eef47abbc8905103c625b99499b7d967bf8b401db04f60f",
+        ".agents/skills/ea-design/SKILL.md": "e10e77083bcf21aeec6f31cf2af8686e4022eb2193003e77663e69792119ef59",
+        ".agents/skills/environment-analysis/SKILL.md": "6f50e7e0d367ad19ce2ca3542bbdb86b64cc228989fbcebf89bda1f2864a7142",
+        ".agents/skills/growth-strategy/SKILL.md": "42a7cf5e50e62fa459489899a6aa10872a9153371f48cfa57fa546ccc3c8acf3",
+        ".agents/skills/kpi-design/SKILL.md": "9fc9b9820eb971ecb8e119161d698a655c03c24cec80defb31444f014bca95b5",
+        ".agents/skills/logical-thinking/SKILL.md": "77adc20ad851629b7604f25cb92f79c30716bd0073e51f7fd03508ecf6925bdd",
+        ".agents/skills/org-raci-design/SKILL.md": "af24f8ba8658341fa66b0d8fa36e0f2a9a2689c2b7ecf47ebd5251359ced8f5b",
+        ".agents/skills/process-redesign/SKILL.md": "a44dbcfccebd4b4caf758aebb2063c4e4227cc2dd9a87a4fdc025dbcf8ad80d1",
+        ".agents/skills/project-status-report/SKILL.md": "df216949f4526c3181526dd34231e0c93929ac03333d96fef18b8f0283d21dbd",
+        ".agents/skills/quality-management/SKILL.md": "0601f6b5fa4004a4339f116378dc279b971ac9ffd9d838fb08f38dfa53058456",
+        ".agents/skills/quantitative-analysis/SKILL.md": "c3e1a50ac9ea2ab238d04e09e811bafe90e71dd17c9edaceb64c326929428960",
+        ".agents/skills/requirements-definition/SKILL.md": "99bf24b33b226f6bda8208906befb8375501a3f55160be731028b3a2439f7e17",
+        ".agents/skills/risk-issue-management/SKILL.md": "4ee38040bca0f37a5bd1b6f27e1d29be145f933d59ec845f7737f391a9122625",
+        ".agents/skills/storyline-builder/SKILL.md": "fc0d688caa0cde09662b48f5efdf1293cf0e6fd07b638edcaec5bcb15c23bdb8",
+        ".agents/skills/tech-selection/SKILL.md": "4d24eda5aafbf94234e5e2d1fecab48882919b817f6cf66a9edbf2d35cacbc30",
+        "claude/plugins/consulting-agents/agents/business-consultant.md": "b2ef89452967cdc0149d8a9eb50c526b214891f66b3ca824c0b07b7a06c6ac83",
+        "claude/plugins/consulting-agents/agents/it-architect.md": "5cb7b3c9d268095cecdf193ed989787b1112507d2c235305f9e410171a41d958",
+        "claude/plugins/consulting-agents/agents/pmo.md": "a446fef5cc97c5f75613496be249eac5fffcb808e8b578bdfb2ee2382285ca83",
+        "claude/plugins/consulting-agents/agents/strategy-consultant.md": "00c279e2718d8c173a44d0fc81f789c43c34231c515db0f56807bc59536c3129"
+      },
+      "marked_at": "2026-10-31",
+      "note": "claude.ai/Cowork の同期済みプラグイン（2026-10-30 版）",
+      "version": null
+    }
+  }
+}

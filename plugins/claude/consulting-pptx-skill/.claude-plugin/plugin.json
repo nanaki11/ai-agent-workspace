@@ -1,0 +1,8 @@
+{
+  "name": "consulting-pptx-skill",
+  "description": "コンサル品質・経営会議品質のスライド（HTML 16:9→PDF）を作る単体スキル",
+  "author": {
+    "name": "hoshi"
+  },
+  "version": "1.2.0"
+}

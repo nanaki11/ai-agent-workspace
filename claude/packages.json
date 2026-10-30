@@ -35,7 +35,10 @@
       "type": "standalone-skill",
       "claude_ai_skill_id": "skill_01LZyKBd3eAw922mgqqEyxBB",
       "claude_ai_backing_plugin_id": "plugin_01TxDv3uhBpwAX6EXFLMCpv5",
-      "skills": ["consulting-pptx-skill"]
+      "skills": [
+        "consulting-pptx-skill"
+      ],
+      "description": "コンサル品質・経営会議品質のスライド（HTML 16:9→PDF）を作る単体スキル"
     }
   ]
 }

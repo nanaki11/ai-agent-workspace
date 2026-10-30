@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "nanaki11-consulting-toolkit",
+  "version": "1.2.0",
+  "description": "21のコンサルティングスキルの全文・資源と4つの専門家役割。GitHubを正本とする。",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Consulting Toolkit (nanaki11)",
+        "shortDescription": "戦略・業務改革・IT・PMOの分析と提出前検証",
+        "longDescription": "スキル原本を要約せず同梱し、判断事項、根拠、引き継ぎ、品質ゲートを共通化。外部スライド資源と実行ツールは別途必要。",
+        "category": "Productivity",
+        "capabilities": [
+          "Research",
+          "Analysis",
+          "Documents"
+        ]
+      }
+    }
+  }
+}

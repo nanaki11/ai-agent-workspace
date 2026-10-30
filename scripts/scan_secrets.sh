@@ -14,7 +14,11 @@ fi
 
 if command -v detect-secrets >/dev/null 2>&1; then
   echo "== detect-secrets"
-  out=$(detect-secrets scan --all-files --exclude-files '^(\.git|dist)/' .)
+  # 許可リスト：外部スキル consulting-pptx-skill の固定コミット ID（公開リポジトリの版番号で秘密ではない）、
+  # SHA-256 の一覧だけを持つ生成ファイル（SOURCE_MANIFEST.json、sync/state.json。gitleaks と正規表現では検査する）
+  out=$(detect-secrets scan --all-files \
+        --exclude-files '^(\.git|dist)/|SOURCE_MANIFEST\.json$|^sync/state\.json$' \
+        --exclude-lines '5d3b048e944f237c26690ed5f624d7773b302d96' .)
   n=$(printf '%s' "$out" | python3 -c 'import json,sys;print(sum(len(v) for v in json.load(sys.stdin)["results"].values()))')
   printf '%s' "$out" | python3 -c 'import json,sys;[print(" ",f,r["type"],"line",r["line_number"]) for f,v in json.load(sys.stdin)["results"].items() for r in v]'
   echo "  検出: $n 件"; [ "$n" -eq 0 ] || rc=1

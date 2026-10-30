@@ -92,9 +92,22 @@ def main() -> int:
     if r.returncode != 0:
         err("[generate] 生成物が古い。python3 scripts/generate.py を実行する\n" + r.stdout)
 
+    import json as _json
+    from lib_skills import read_version, STATE_JSON
+    v = read_version()
+    if not re.match(r"^\d+\.\d+\.\d+$", v):
+        err(f"[version] VERSION の形式が不正: {v}")
+    pj = _json.loads((ROOT / "claude/plugins/consulting-agents/.claude-plugin/plugin.json").read_text(encoding="utf-8"))
+    if pj.get("version") != v:
+        err(f"[version] claude/plugins/consulting-agents の plugin.json version={pj.get('version')} が VERSION={v} と不一致")
+    if STATE_JSON.exists():
+        try:
+            _json.loads(STATE_JSON.read_text(encoding="utf-8"))["targets"]
+        except Exception as e:  # noqa: BLE001
+            err(f"[sync] sync/state.json が読めない: {e}")
     for f in ROOT.rglob("*"):
         rel = f.relative_to(ROOT).as_posix()
-        if rel.startswith((".git/", "dist/")):
+        if rel.startswith((".git/", "dist/", "plugins/")):
             continue
         if f.is_file() and FORBIDDEN.search(rel) and not rel.endswith(".env.example"):
             err(f"[secret] 禁止ファイル: {rel}")

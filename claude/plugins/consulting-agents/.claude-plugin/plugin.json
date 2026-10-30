@@ -1,6 +1,8 @@
 {
   "name": "consulting-agents",
-  "version": "0.1.0",
+  "version": "1.2.0",
   "description": "戦略コンサル・ビジネスコンサル・ITアーキテクト・PMOのエージェント4つと、共通／特化スキル20個（draw.io作図を含む）",
-  "author": { "name": "hoshi" }
+  "author": {
+    "name": "hoshi"
+  }
 }
