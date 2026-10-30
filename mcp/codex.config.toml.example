@@ -1,0 +1,7 @@
+# Codex の ~/.codex/config.toml に追記する MCP 設定の雛形。
+# URL は要確認・要選定（mcp/README.md 参照）。トークンは環境変数名だけを書き、値は書かない。
+# キー名（url / bearer_token_env_var）は Codex の最新ドキュメントで要確認。
+
+# [mcp_servers.google_drive]
+# url = "https://<要選定>"
+# bearer_token_env_var = "GOOGLE_DRIVE_MCP_TOKEN"

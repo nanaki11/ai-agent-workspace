@@ -1,0 +1,12 @@
+{
+  "_comment": "Claude Code 用 .mcp.json の雛形。値は環境変数で渡す（${VAR} 展開）。URL は要確認・要選定。使うときは _comment と _example_ 接頭辞を外す。",
+  "mcpServers": {
+    "_example_google-drive": {
+      "type": "http",
+      "url": "${GOOGLE_DRIVE_MCP_URL}",
+      "headers": {
+        "Authorization": "Bearer ${GOOGLE_DRIVE_MCP_TOKEN}"
+      }
+    }
+  }
+}

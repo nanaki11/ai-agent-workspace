@@ -1,0 +1,31 @@
+# 生成物
+dist/
+__pycache__/
+*.pyc
+
+# 機密情報（コミット禁止）
+.env
+.env.*
+!.env.example
+!mcp/.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+.oauth_token
+.session_ingress_token
+*credentials*.json
+.claude.json
+.claude/settings.local.json
+launcher-settings.json
+
+# スキル実行時に取得する外部リポジトリ・成果物
+/consulting-pptx-skill/
+/outputs/
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

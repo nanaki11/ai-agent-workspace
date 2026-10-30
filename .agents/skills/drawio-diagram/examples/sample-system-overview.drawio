@@ -1,0 +1,98 @@
+<mxfile host="Claude" type="device">
+  <diagram id="page-1" name="システム全体構成（To-Be）">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="&lt;b&gt;システム全体構成図（To-Be）&lt;/b&gt;　v0.1 / 2026-10-21" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="600" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- 層（レーン） -->
+        <mxCell id="lane-ch" value="チャネル" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;startSize=40;fillColor=#FFF2CC;strokeColor=#D6B656;" vertex="1" parent="1">
+          <mxGeometry x="40" y="50" width="1100" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="lane-app" value="業務アプリ" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;startSize=40;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry x="40" y="190" width="1100" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="lane-int" value="連携基盤" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;startSize=40;fillColor=#D5E8D4;strokeColor=#82B366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="330" width="1100" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="lane-data" value="データ基盤" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;startSize=40;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="1">
+          <mxGeometry x="40" y="470" width="1100" height="140" as="geometry"/>
+        </mxCell>
+
+        <!-- チャネル -->
+        <mxCell id="ch-portal" value="顧客ポータル" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#D6B656;strokeWidth=3;" vertex="1" parent="lane-ch">
+          <mxGeometry x="80" y="30" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="ch-mobile" value="営業モバイル" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#D6B656;" vertex="1" parent="lane-ch">
+          <mxGeometry x="320" y="30" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- 業務アプリ -->
+        <mxCell id="app-crm" value="CRM&lt;br&gt;(SaaS)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#6C8EBF;strokeWidth=3;" vertex="1" parent="lane-app">
+          <mxGeometry x="200" y="30" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="app-erp" value="基幹ERP" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#FFFFFF;strokeWidth=2;strokeColor=#D79B00;" vertex="1" parent="lane-app">
+          <mxGeometry x="440" y="30" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="app-legacy" value="旧販売管理" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#6C8EBF;dashed=1;opacity=50;" vertex="1" parent="lane-app">
+          <mxGeometry x="680" y="30" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- 連携基盤 -->
+        <mxCell id="int-ipaas" value="API連携基盤（iPaaS）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#FFFFFF;strokeColor=#82B366;strokeWidth=3;" vertex="1" parent="lane-int">
+          <mxGeometry x="200" y="30" width="400" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- データ基盤 -->
+        <mxCell id="data-mdm" value="顧客マスタ&lt;br&gt;(MDM)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;size=10;fillColor=#FFFFFF;strokeColor=#9673A6;strokeWidth=3;" vertex="1" parent="lane-data">
+          <mxGeometry x="200" y="30" width="160" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="data-dwh" value="DWH" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;size=10;fillColor=#FFFFFF;strokeColor=#9673A6;" vertex="1" parent="lane-data">
+          <mxGeometry x="440" y="30" width="160" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- 社外 -->
+        <mxCell id="ext-bank" value="取引銀行" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=#F5F5F5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="220" width="140" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- 連携 -->
+        <mxCell id="e-portal-crm" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="ch-portal" target="app-crm">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-mobile-crm" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="ch-mobile" target="app-crm">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-crm-ipaas" value="API" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=block;startFill=1;" edge="1" parent="1" source="app-crm" target="int-ipaas">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-erp-ipaas" value="API" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=block;startFill=1;" edge="1" parent="1" source="app-erp" target="int-ipaas">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-ipaas-mdm" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=block;startFill=1;" edge="1" parent="1" source="int-ipaas" target="data-mdm">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-ipaas-dwh" value="日次" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="int-ipaas" target="data-dwh">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-erp-bank" value="全銀ファイル" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="app-erp" target="ext-bank">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="180"/>
+              <mxPoint x="1270" y="180"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 凡例 -->
+        <mxCell id="legend" value="&lt;b&gt;凡例&lt;/b&gt;&lt;br&gt;太枠＝新規　オレンジ枠＝改修　点線・半透明＝廃止&lt;br&gt;実線矢印＝API（同期）　点線矢印＝ファイル・バッチ（非同期）" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;spacing=8;strokeColor=#999999;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="40" y="630" width="560" height="70" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
