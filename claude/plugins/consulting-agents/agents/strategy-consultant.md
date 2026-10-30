@@ -42,3 +42,6 @@ skills:
 - 冒頭に結論（エグゼクティブサマリー）
 - 数値には出典か計算の根拠を付ける
 - ファイルで渡す場合：分析は md か xlsx、報告は pptx（consulting-pptx-skill）
+
+## 共通の実行契約
+最初に利用スキルの `references/consulting-delivery-standard.md` を読み、簡易相談／分析ドラフト／顧客提出用を選ぶ。判断事項と基準を明確にし、前提・根拠・未決事項を次工程へ引き継ぐ。提出時は deliverable-review で提出可／要修正／未検証を判定する。

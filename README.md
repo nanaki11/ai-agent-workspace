@@ -41,7 +41,11 @@ Claude・OpenAI Codex・ChatGPT で共通に使うスキルとエージェント
 
 - 共通ルール：`common/rules/consulting-output-rules.md` をカスタム指示またはプロジェクトの指示に貼る。
 - エージェント：`claude/plugins/consulting-agents/agents/<name>.md` の本文をプロジェクトの指示に貼る。
-- スキル：ChatGPT のスキル機能でスキルフォルダを登録する（登録方法は ChatGPT 側の最新仕様を要確認）。
+- 配布物：`python3 scripts/build_chatgpt_package.py` で `dist/chatgpt/nanaki11-consulting-toolkit.zip` を生成する。21スキルの全文・添付資源と、4専門家定義を持つルーターを同梱する。
+- 既存プラグインの更新時は `--legacy-manifest /path/to/current-plugin.json` を指定し、表示名・著者・スタータープロンプト等を保持する。認証情報や非公開のメタデータをリポジトリへ追加しない。
+- `SOURCE_MANIFEST.json` に原本コミット、未コミット変更の有無、各ファイルのSHA-256を記録する。配布用はコミット後に再ビルドし、`working_tree_dirty: false` を確認する。
+- GitHubの更新だけではインストール済みChatGPTプラグインは更新されない。生成ZIPを、利用環境が提供するプラグイン更新操作で別途反映する。本スクリプトは公開・インストールを行わない。
+- 外部のスライド生成リポジトリ・提供元固有ツールは同梱しない。依存関係はマニフェストに明記する。
 
 ## 更新の流れ
 
@@ -52,6 +56,7 @@ python3 scripts/generate.py
 # 3. 検証
 python3 scripts/validate.py
 bash scripts/scan_secrets.sh
+python3 -m unittest discover -s tests -v
 # 4. Claude 環境との差分確認（Claude の環境で実行）
 python3 scripts/verify_against_claude.py --claude-home ~/.claude
 # 5. commit・push（force push 禁止）
@@ -62,6 +67,7 @@ python3 scripts/verify_against_claude.py --claude-home ~/.claude
 | スクリプト | 役割 |
 |---|---|
 | `scripts/generate.py` | AGENTS.md と `.codex/agents/*.toml` を正本から生成（`--check` で最新か確認） |
+| `scripts/build_chatgpt_package.py` | ChatGPT向けに全文・資源・役割・ソース情報を同梱。インストールは別操作 |
 | `scripts/build_claude_packages.py` | Claude 用のプラグイン／スキル zip を `dist/claude/` に組み立て |
 | `scripts/validate.py` | frontmatter、参照パス、スキル名の重複、エージェントの参照、生成物の鮮度、禁止ファイルをチェック |
 | `scripts/scan_secrets.sh` | gitleaks・detect-secrets・正規表現で機密情報を検査 |
@@ -75,3 +81,10 @@ python3 scripts/verify_against_claude.py --claude-home ~/.claude
 - コミット前に `bash scripts/scan_secrets.sh` を実行する。
 
 詳細：[docs/INVENTORY.md](docs/INVENTORY.md)、[docs/MIGRATION_REPORT.md](docs/MIGRATION_REPORT.md)
+
+## プロ向け実行契約
+
+共通の判断基準は `common/rules/consulting-delivery-standard.md` を編集する。
+`generate.py` が各スキルの `references/consulting-delivery-standard.md` に複製し、単独配布でも参照できるようにする。参照ファイルを直接編集しない。
+簡易相談・分析ドラフト・顧客提出用を分け、顧客提出用は「提出可／要修正／未検証」を明記する。
+変更点・検証範囲は [docs/CONSULTING_QUALITY_UPDATE.md](docs/CONSULTING_QUALITY_UPDATE.md) を参照。

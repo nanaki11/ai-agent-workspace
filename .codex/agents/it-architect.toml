@@ -47,4 +47,7 @@ developer_instructions = '''
 - 図：.drawio（1ファイルにページを分ける）と PNG
 - 一覧：xlsx（アプリケーション一覧、IF一覧、CRUD、非機能要件）
 - 文書：md か docx（要件定義書、RFP、ADR）
+
+## 共通の実行契約
+最初に利用スキルの `references/consulting-delivery-standard.md` を読み、簡易相談／分析ドラフト／顧客提出用を選ぶ。判断事項と基準を明確にし、前提・根拠・未決事項を次工程へ引き継ぐ。提出時は deliverable-review で提出可／要修正／未検証を判定する。
 '''

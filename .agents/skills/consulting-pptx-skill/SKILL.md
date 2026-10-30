@@ -5,24 +5,33 @@ description: "コンサル品質・経営会議品質のスライド（HTML 16:9
 
 # コンサル型スライド作成スキル（carnot-tech/consulting-pptx-skill, MIT）
 
-本体（規約・パーツ集・スクリプト・カタログPDF）は GitHub リポジトリにある。このスキルはそれを取得して、リポジトリの SKILL.md の手順どおりに作る。**ただし「タイトルとリード文」だけは、下の「★ タイトル＋リード文方式」がリポジトリの規約と storyline-builder の「タイトルは言い切りの文」より優先する。**
+## 実行契約
+作業前に [実行・品質規約](references/consulting-delivery-standard.md) を読む。単独利用時も同じ規約を適用し、作業モードに応じて記録と検証を絞る。
+
+
+本体（規約・パーツ集・スクリプト・カタログPDF）は GitHub リポジトリにある。このスキルはそれを取得して、リポジトリの SKILL.md の手順どおりに作る。**ただし「タイトルとリード文」だけは、下の「★ タイトル＋リード文方式」がリポジトリの規約と 他のテンプレートの「タイトルは言い切りの文」より優先する。**
 
 ## 0. ブートストラップ（毎回最初に）
 
 ```bash
 SK="$PWD/consulting-pptx-skill"
+SK_REV="5d3b048e944f237c26690ed5f624d7773b302d96"
 if [ ! -d "$SK" ]; then
-  git clone https://github.com/carnot-tech/consulting-pptx-skill.git "$SK"
-  # 動作確認済みのコミット（2026-09-28）。新しい版を使うなら下の行を外す
-  git -C "$SK" checkout -q 5d3b048e944f237c26690ed5f624d7773b302d96 || true
+  git clone https://github.com/carnot-tech/consulting-pptx-skill.git "$SK" || exit 1
+  git -C "$SK" checkout -q "$SK_REV" || exit 1
 fi
+# 既存の取得物も検証する。異なる版を無断で上書きしない。
+test "$(git -C "$SK" rev-parse HEAD)" = "$SK_REV" || exit 1
+test -z "$(git -C "$SK" status --porcelain)" || exit 1
 ```
+
+取得・版確認に失敗したら、この外部ツールの実行を止める。利用可能な別の生成手段に切り替え、適用できない検証を明記する。別版を採用する場合はコミットと検証結果を記録する。
 
 その後、必ず次を Read する:
 
 1. `$SK/SKILL.md` — 手順の正本。以降はこれに従う（タイトルとリード文の扱いを除く）
 2. `$SK/references/slide-rules.md` — **作成前に全文必読**（規約の正典。§2・§3 のうちタイトル／リード文に関する項は下の★で上書き）
-3. 必要に応じて `references/archetype-catalog.md`（62型一覧）、`references/ai-smell-lexicon.md`（文章仕上げ）、`references/content-review-prompt.md`（レビュー指示文）
+3. 必要に応じて `$SK/references/archetype-catalog.md`（62型一覧）、`$SK/references/ai-smell-lexicon.md`（文章仕上げ）、`$SK/references/content-review-prompt.md`（レビュー指示文）
 
 スクリプトは `$SK/scripts/` から実行する（`python3 $SK/scripts/new_deck.py --list` など）。成果物の HTML/PDF は作業ディレクトリに出力する。
 
@@ -92,8 +101,13 @@ fi
 
 ## PowerPoint（.pptx）が要るとき
 
-HTML→編集可能PPTXの変換は含まない。まず PDF で渡すことを提案する。編集可能な形が必要なら `$SK/assets/SuperTemplate_62type.pptx`（62型の見本帳）を案内するか、pptx スキルで別途作る。pptx で作る場合も★方式（短いタイトル＋タイトル直下のリード文テキストボックス）に従う。
+HTML→編集可能PPTXの変換は含まない。編集可能PPTXの依頼には利用可能なpptx生成手段で応える。見本が必要なら `$SK/assets/SuperTemplate_62type.pptx`（62型の見本帳）を案内するか、pptx スキルで別途作る。pptx で作る場合も★方式（短いタイトル＋タイトル直下のリード文テキストボックス）に従う。
 
 ## 注釈
 
 裏表紙（b10）左下に「本資料は consulting-pptx-skill（github.com/carnot-tech/consulting-pptx-skill）で作成」が既定で入る。他ページには入れない。
+
+## 実務での追加検証
+- 編集可能PPTXを求められたら利用可能なプレゼン生成スキル・ツールで直接作る。PDFへの置換を既定にせず、困難な場合は制約を示す。
+- 全ページをレンダリングし、文字切れ・重なり・図の欠落・数値と出典・編集可能性を確認する。未実施の検査は未検証とする。
+- 外部依存は取得元と実際のコミットを確認する。固定版の取得失敗を無視して別版を実行しない。外部の追加インストール・コード実行は環境の権限内で行う。

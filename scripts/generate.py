@@ -131,6 +131,11 @@ def build_codex_agents() -> dict[str, str]:
 def main() -> int:
     check = "--check" in sys.argv
     targets = {ROOT / "AGENTS.md": build_agents_md()}
+    standard = (RULES_DIR / "consulting-delivery-standard.md").read_text(encoding="utf-8")
+    for skill in load_skills().values():
+        targets[skill["dir"] / "references" / "consulting-delivery-standard.md"] = (
+            "<!-- Generated from common/rules/consulting-delivery-standard.md; do not edit. -->\n" + standard
+        )
     for fn, content in build_codex_agents().items():
         targets[CODEX_AGENTS_DIR / fn] = content
     stale = []

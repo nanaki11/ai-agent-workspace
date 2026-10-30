@@ -40,3 +40,6 @@ skills:
 ## 出力のルール
 - 業務一覧・課題一覧・RACI は xlsx、業務フローは .drawio と PNG、報告は pptx
 - 業務一覧・フロー・記述書・課題一覧の ID を一致させる
+
+## 共通の実行契約
+最初に利用スキルの `references/consulting-delivery-standard.md` を読み、簡易相談／分析ドラフト／顧客提出用を選ぶ。判断事項と基準を明確にし、前提・根拠・未決事項を次工程へ引き継ぐ。提出時は deliverable-review で提出可／要修正／未検証を判定する。

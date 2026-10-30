@@ -40,6 +40,6 @@
 | 1 | ユーザー PC 上の `~/.claude`（ローカルの Claude Code 設定）は未調査 | PC を接続したセッションで `verify_against_claude.py` と棚卸しを再実行 |
 | 2 | Codex での実動作（スキル検出、カスタムエージェントの読み込み）は未検証（Codex CLI の認証がこの環境に無い） | Codex で `/skills` と各エージェントの起動を確認 |
 | 3 | Google Drive / Slides の MCP を Codex で使うためのサーバー URL・認証方式が【不明】 | 組織で MCP サーバーを選定し `mcp/` のテンプレートに反映 |
-| 4 | 共通ルール原文は「以下のラベル」に【推論】【不明】の2つのみで、【事実】ラベルが無い（原文どおり転記） | 意図どおりか確認し、必要なら `common/rules/` を修正して `generate.py` |
+| 4 | 解消済み（2026-10-30）：事実・仮定・推論・不明を定義。検索手段の固定指定も解消 | `common/rules/` を正本として生成 |
 | 5 | consulting-pptx-skill は外部リポジトリ（固定コミット）に依存。リポジトリ消失時に動かない | 必要なら MIT ライセンス表記を付けてフォークを保持 |
 | 6 | claude.ai 上のプラグインと GitHub の同期は手動（zip の再アップロード） | 更新時は `build_claude_packages.py` → アップロード → `verify_against_claude.py` |
