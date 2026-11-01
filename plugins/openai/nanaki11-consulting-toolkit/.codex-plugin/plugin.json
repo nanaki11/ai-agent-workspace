@@ -1,6 +1,6 @@
 {
   "name": "nanaki11-consulting-toolkit",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "skills": "./skills/",
   "description": "21のコンサルティングスキルの全文・資源と4つの専門家役割。GitHubを正本とする。",
   "interface": {

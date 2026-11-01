@@ -1,5 +1,9 @@
 # 変更履歴
 
+## 1.2.1（2026-11-01）
+
+- 開発の共通ルール `common/rules/development-workflow.md` を追加：日本語出力、推奨フォルダ構成（docs/・tests/reports/・deploy/history.md）、単体テストの記録、設計書の最新化、ローカルで手動確認してからデプロイ。AGENTS.md に取り込み、Claude Code は `~/.claude/CLAUDE.md` にコピーして使う（README）
+
 ## 1.2.0（2026-10-31）
 
 - 目的を「Claude → GitHub → ChatGPT の一方向移行」から「GitHub を正本とした双方向の定期同期」に変更（README、docs/SYNC.md）

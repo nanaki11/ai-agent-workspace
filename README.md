@@ -25,7 +25,7 @@ Claude・ChatGPT・Codex で使うコンサルティング用スキル（21件�
 │   └── plugins/consulting-agents/
 │       ├── .claude-plugin/plugin.json
 │       └── agents/*.md             # ★エージェントの正本（4件）
-├── common/rules/                   # ★共通ルールの正本
+├── common/rules/                   # ★共通ルールの正本（development-workflow.md は開発の共通ルール）
 ├── sync/state.json                 # 環境ごとの「前回同期時点」のハッシュ（sync.py が更新）
 ├── plugins/                        # 生成物：配布用プラグイン（Git 管理＝GitHub から直接インストール可）
 │   ├── claude/consulting-agents/   #   Claude（20スキル＋4エージェント）
@@ -82,6 +82,17 @@ python3 scripts/generate.py && python3 scripts/validate.py && python3 -m unittes
 
 判断基準の正本は `common/rules/consulting-delivery-standard.md`。`generate.py` が各スキルの `references/` に写す（写しは直接編集しない）。
 簡易相談・分析ドラフト・顧客提出用を分け、顧客提出用は「提出可／要修正／未検証」を明記する。変更履歴は [docs/CONSULTING_QUALITY_UPDATE.md](docs/CONSULTING_QUALITY_UPDATE.md)。
+
+## 開発の共通ルール
+
+アプリ開発（VSCode・Claude Code・Codex）で守る共通ルールの正本は `common/rules/development-workflow.md`。日本語での出力、推奨フォルダ構成、単体テストの記録、設計書の最新化、ローカルで手動確認してからデプロイ、を定める。
+
+| 環境 | 反映方法 |
+|---|---|
+| Claude Code | `common/rules/development-workflow.md` を `~/.claude/CLAUDE.md` にコピーする（全プロジェクトで読み込まれる） |
+| Codex | `generate.py` が AGENTS.md に取り込む |
+
+ルールを変えるときは正本を直し、`generate.py` を実行してから、上の表の方法で各環境に反映する。
 
 ## セキュリティ
 
