@@ -48,6 +48,18 @@ class DistributionTest(unittest.TestCase):
                         if src.is_file() and '__pycache__' not in src.parts and src.suffix != '.pyc':
                             self.assertEqual(src.read_bytes(), z.read(prefix + '/' + src.relative_to(load_skills()[name]['dir']).as_posix()))
 
+    def test_claude_plugin_injects_shared_rules_at_session_start(self):
+        for package in load_packages()['packages']:
+            if not package.get('rules'):
+                continue
+            hooks = json.loads((ROOT / package['source_dir'] / 'hooks/hooks.json').read_text(encoding='utf-8'))
+            command = hooks['hooks']['SessionStart'][0]['hooks'][0]['command']
+            with zipfile.ZipFile(ROOT / 'dist/claude' / (package['name'] + '.zip')) as z:
+                self.assertIn('hooks/hooks.json', [n.split('/', 1)[1] for n in z.namelist()])
+                for r in package['rules']:
+                    self.assertIn('${CLAUDE_PLUGIN_ROOT}/rules/' + r, command)
+                    self.assertEqual((ROOT / 'common/rules' / r).read_bytes(), z.read(package['name'] + '/rules/' + r))
+
     def test_generated_drift_is_rejected(self):
         p = next(iter(load_skills().values()))['dir'] / 'references/consulting-delivery-standard.md'
         original = p.read_bytes()

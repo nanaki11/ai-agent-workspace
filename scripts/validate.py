@@ -5,7 +5,7 @@
 2. スキル名の重複
 3. SKILL.md 内の参照パス（${CLAUDE_SKILL_DIR}/…、${CLAUDE_PLUGIN_ROOT}/…、相対 scripts/ 等）の実在
 4. エージェントが参照するスキルの実在
-5. claude/packages.json が全スキルを過不足なく1回ずつ含むこと
+5. claude/packages.json が全スキルを過不足なく1回ずつ含むこと（rules に挙げた共通ルールの実在も）（rules に挙げた共通ルールの実在も）
 6. 生成物（AGENTS.md・.codex/agents）が最新であること
 7. 禁止ファイル（.env、鍵、認証キャッシュ等）が無いこと
 """
@@ -77,6 +77,10 @@ def main() -> int:
         if not a["meta"].get("description"):
             err(f"[agent] {name}: description が無い")
 
+    for p in load_packages()["packages"]:
+        for r in p.get("rules", []):
+            if not (ROOT / "common/rules" / r).exists():
+                err(f"[packages] {p['name']} の rules に挙げた {r} が common/rules に無い")
     listed = [s for p in load_packages()["packages"] for s in p["skills"]]
     for s, c in Counter(listed).items():
         if c > 1:

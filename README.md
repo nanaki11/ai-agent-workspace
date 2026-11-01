@@ -89,10 +89,32 @@ python3 scripts/generate.py && python3 scripts/validate.py && python3 -m unittes
 
 | 環境 | 反映方法 |
 |---|---|
-| Claude Code | `common/rules/development-workflow.md` を `~/.claude/CLAUDE.md` にコピーする（全プロジェクトで読み込まれる） |
+| Claude Code | `consulting-agents` プラグインに同梱（`rules/`）し、`hooks/hooks.json` の SessionStart フックがセッション開始時に読み込ませる。プラグインを更新すれば全 PC に届く（Windows では Git Bash が必要） |
 | Codex | `generate.py` が AGENTS.md に取り込む |
 
-ルールを変えるときは正本を直し、`generate.py` を実行してから、上の表の方法で各環境に反映する。
+ルールを変えるときは正本を直し、`VERSION` を上げて `generate.py` を実行し、push する。同梱するルールは `claude/packages.json` の `rules` で指定する。フックの出力は 10,000 文字までなので、ルールはその範囲に収める。
+
+### 全 PC の Claude Code を自動で更新する（組織の管理設定）
+
+claude.ai の「組織設定 → Claude Code → Managed settings」（Owner 権限）に次を設定すると、サインインしている全 PC がこのリポジトリのマーケットプレイスを登録してプラグインを入れ、push（`VERSION` の更新）のたびに自動で更新する。組織の全メンバーに適用される。
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "nanaki11-ai-agent-workspace": {
+      "source": { "source": "github", "repo": "nanaki11/ai-agent-workspace" },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {
+    "consulting-agents@nanaki11-ai-agent-workspace": true,
+    "consulting-pptx-skill@nanaki11-ai-agent-workspace": true,
+    "consulting-agents@synced": false
+  }
+}
+```
+
+`consulting-agents@synced: false` は、組織ライブラリから同期される同じプラグインを Claude Code では読み込まないための指定（スキルとルールの二重読み込みを防ぐ）。claude.ai（Web・デスクトップアプリ）は引き続き組織ライブラリの版を使うため、版を上げたら `dist/claude/consulting-agents.zip` をアップロードする。
 
 ## セキュリティ
 

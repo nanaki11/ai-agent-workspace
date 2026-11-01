@@ -5,6 +5,7 @@
   （plugins/claude/ への出力は scripts/generate.py が行う。マーケットプレイス配布用で Git 管理対象）
 
 - <dest>/consulting-agents/          … Claude Code の `--plugin-dir`／マーケットプレイス／PublishPlugin で使うプラグイン
+                                       （packages.json の rules に挙げた共通ルールを rules/ に写す）
 - <dest>/consulting-pptx-skill/      … 単体スキルを1つだけ含むプラグイン（Claude Code 用）
 - dist/claude/*.zip                  … claude.ai へ手動アップロードする zip
 
@@ -19,7 +20,7 @@ import zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from lib_skills import ROOT, SKILLS_DIR, load_packages, read_version  # noqa: E402
+from lib_skills import ROOT, RULES_DIR, SKILLS_DIR, load_packages, read_version  # noqa: E402
 
 DIST = ROOT / "dist" / "claude"
 IGNORE = shutil.ignore_patterns("__pycache__", "*.pyc")
@@ -56,6 +57,9 @@ def build(dest: Path = DIST, archive: bool = True, quiet: bool = False) -> list[
         mf.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         for s in pkg["skills"]:
             shutil.copytree(SKILLS_DIR / s, out / "skills" / s, symlinks=False, ignore=IGNORE)
+        for r in pkg.get("rules", []):  # hooks/hooks.json がセッション開始時に読み込ませる共通ルール
+            (out / "rules").mkdir(exist_ok=True)
+            shutil.copyfile(RULES_DIR / r, out / "rules" / r)
         outs.append(out)
         if archive:
             if pkg["type"] == "plugin":

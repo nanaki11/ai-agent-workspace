@@ -1,5 +1,11 @@
 # 変更履歴
 
+## 1.3.0（2026-11-01）
+
+- `consulting-agents` プラグインに開発の共通ルール（`rules/development-workflow.md`）と SessionStart フック（`hooks/hooks.json`）を同梱。プラグインを入れた全 PC で、セッション開始時にルールが読み込まれる（各 PC の `~/.claude/CLAUDE.md` は不要）
+- `claude/packages.json` に `rules` を追加し、`build_claude_packages.py` が共通ルールをプラグインに写すようにした。`validate.py` で実在を検査、回帰テストを追加
+- README に、組織の管理設定で全 PC のマーケットプレイス登録と自動更新を行う設定例を追加
+
 ## 1.2.1（2026-11-01）
 
 - 開発の共通ルール `common/rules/development-workflow.md` を追加：日本語出力、推奨フォルダ構成（docs/・tests/reports/・deploy/history.md）、単体テストの記録、設計書の最新化、ローカルで手動確認してからデプロイ。AGENTS.md に取り込み、Claude Code は `~/.claude/CLAUDE.md` にコピーして使う（README）

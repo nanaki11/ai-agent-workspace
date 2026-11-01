@@ -1,5 +1,5 @@
 {
-  "_comment": "Claude 側の配布単位の定義。スキル本体は .agents/skills/ が正本（SSOT）。scripts/build_claude_packages.py がこの定義から dist/claude/ を組み立てる。",
+  "_comment": "Claude 側の配布単位の定義。スキル本体は .agents/skills/ が正本（SSOT）。scripts/build_claude_packages.py がこの定義から dist/claude/ を組み立てる。 rules に挙げた common/rules/ のファイルはプラグインの rules/ に写し、hooks/hooks.json がセッション開始時に読み込ませる。",
   "packages": [
     {
       "name": "consulting-agents",
@@ -7,6 +7,9 @@
       "source_dir": "claude/plugins/consulting-agents",
       "claude_ai_plugin_id": "plugin_01EcZHLfyZYT5soDVCHmTwY8",
       "marketplace": "Organization library",
+      "rules": [
+        "development-workflow.md"
+      ],
       "skills": [
         "bpm-process-mapping",
         "business-plan",

@@ -1,0 +1,15 @@
+{
+  "description": "セッション開始時に開発の共通ルール（rules/development-workflow.md）を読み込ませる。ルールの正本は common/rules/development-workflow.md",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat \"${CLAUDE_PLUGIN_ROOT}/rules/development-workflow.md\""
+          }
+        ]
+      }
+    ]
+  }
+}

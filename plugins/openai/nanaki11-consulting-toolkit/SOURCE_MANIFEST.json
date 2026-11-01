@@ -1,6 +1,6 @@
 {
   "repository": "https://github.com/nanaki11/ai-agent-workspace",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "sha256": {
     ".agents/skills/bpm-process-mapping/references/consulting-delivery-standard.md": "9ca9f2fee8c03c177e35b07980e9f1cd2af2b6003941da3ad9eedd19b2d3fe8e",
     ".agents/skills/bpm-process-mapping/SKILL.md": "d0f3732f2c1648be7ad0f31ad443718255037fa19ac5791cae312a2eff9eb538",
