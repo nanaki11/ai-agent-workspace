@@ -26,8 +26,8 @@ class DistributionTest(unittest.TestCase):
                     dst = self.out / 'skills' / name / src.relative_to(skill['dir'])
                     self.assertEqual(src.read_bytes(), dst.read_bytes(), str(src))
                     self.assertEqual(hashlib.sha256(src.read_bytes()).hexdigest(), manifest['sha256'][src.relative_to(ROOT).as_posix()])
-        self.assertEqual(21, len(load_skills()))
-        self.assertEqual(22, len(list((self.out / 'skills').glob('*/SKILL.md'))))
+        self.assertEqual(41, len(load_skills()))
+        self.assertEqual(len(load_skills()) + 1, len(list((self.out / 'skills').glob('*/SKILL.md'))))
 
     def test_roles_and_shared_rules_are_self_contained(self):
         for a in load_claude_agents().values():

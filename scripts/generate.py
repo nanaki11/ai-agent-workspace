@@ -81,7 +81,7 @@ def build_agents_md() -> str:
         "## 3. 専門家エージェント",
         "",
         "Claude ではサブエージェント（`claude/plugins/consulting-agents/agents/`）、Codex ではカスタムエージェント（`.codex/agents/*.toml`、生成物）として定義している。",
-        "ChatGPT／Codex のプラグイン（`plugins/openai/`）では `consulting-agent-router` スキルが4役割を振り分ける。",
+        f"ChatGPT／Codex のプラグイン（`plugins/openai/`）では `consulting-agent-router` スキルが{len(agents)}役割を振り分ける。",
         "",
         "| エージェント | 役割 | 使うスキル |",
         "|---|---|---|",
