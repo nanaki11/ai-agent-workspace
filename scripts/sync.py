@@ -65,9 +65,10 @@ def scope(target: str) -> list[str]:
     if target == "codex":  # ~/.agents/skills にはスキルだけが入る
         return files
     files += [rel(f) for f in sorted(CLAUDE_AGENTS_DIR.glob("*.md"))]
-    files += [rel(f) for f in sorted(RULES_DIR.glob("*.md"))]
-    if target == "claude":  # Claude には共通ルールのうち実行規約（写し）だけが入る
-        files = [f for f in files if not f.startswith("common/rules/") or f.endswith(STANDARD_NAME)]
+    files += [rel(f) for f in sorted(RULES_DIR.iterdir()) if f.suffix in {'.md', '.json'}]
+    if target == "claude":
+        bundled_rules = {r for p in pk for r in p.get('rules', [])} | {STANDARD_NAME}
+        files = [f for f in files if not f.startswith('common/rules/') or Path(f).name in bundled_rules]
     return files
 
 
@@ -129,7 +130,7 @@ def target_files(roots: list[Path]) -> tuple[dict[str, bytes], list[str]]:
             sdir = skill_md.parent
             name = sdir.name
             if ROUTER == name:
-                for f in sorted((sdir / "references").glob("*.md")):
+                for f in sorted(f for f in (sdir / 'references').iterdir() if f.suffix in {'.md', '.json'}):
                     if (CLAUDE_AGENTS_DIR / f.name).exists():
                         mapped[rel(CLAUDE_AGENTS_DIR / f.name)] = f.read_bytes()
                     elif (RULES_DIR / f.name).exists():
@@ -149,6 +150,10 @@ def target_files(roots: list[Path]) -> tuple[dict[str, bytes], list[str]]:
         for agents_dir in [d for d in root.rglob("agents") if (d.parent / ".claude-plugin").is_dir()]:
             for f in sorted(agents_dir.glob("*.md")):
                 mapped[rel(CLAUDE_AGENTS_DIR / f.name)] = f.read_bytes()
+        for manifest in root.rglob('.claude-plugin/plugin.json'):
+            for f in (manifest.parent.parent / 'rules').glob('*'):
+                if f.is_file() and (RULES_DIR / f.name).exists():
+                    mapped[rel(RULES_DIR / f.name)] = f.read_bytes()
     # 実行規約の写し → common/rules の正本に戻す（ヘッダーを外す）
     bodies = {}
     for name, b in std_copies.items():

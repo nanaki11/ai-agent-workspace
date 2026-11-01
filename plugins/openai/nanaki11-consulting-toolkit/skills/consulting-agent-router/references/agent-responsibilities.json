@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "scope": "一般的な経営・業務・ITコンサルティングとWebアプリの設計・実装・運用。主担当はエージェント間の成果物整理責任で、人の承認権限を意味しない。",
+  "external_responsibilities": [
+    "経営・予算・戦略の最終承認",
+    "PMによる全体WBS策定・人員配置・対人調整",
+    "業務責任者による業務ルール・UAT合否",
+    "リリース責任者による本番Go/No-Go",
+    "法務・税務・規制の専門判断",
+    "専門的なML・組込み・モバイル等の開発は個別に範囲を再定義"
+  ],
+  "roles": {
+    "strategy-consultant": {
+      "layer": "direction",
+      "owns": "経営・事業の選択と投資理由"
+    },
+    "business-consultant": {
+      "layer": "direction",
+      "owns": "業務・組織・利用者の要求と定着"
+    },
+    "it-architect": {
+      "layer": "direction",
+      "owns": "システム要件と領域横断の整合"
+    },
+    "frontend-engineer": {
+      "layer": "delivery",
+      "owns": "利用者接点の詳細設計・実装・検証"
+    },
+    "backend-engineer": {
+      "layer": "delivery",
+      "owns": "API・業務処理・アプリデータの詳細設計・実装・検証"
+    },
+    "infrastructure-engineer": {
+      "layer": "delivery",
+      "owns": "基盤・配備・サービス運用の詳細設計・実装・検証"
+    },
+    "pmo": {
+      "layer": "governance",
+      "owns": "進捗・品質・リスクと切替全体の管理支援"
+    }
+  },
+  "work_types": [
+    {
+      "id": "strategy-decision",
+      "output": "経営・事業戦略、投資判断材料",
+      "owner": "strategy-consultant",
+      "skills": [
+        "growth-strategy",
+        "business-plan"
+      ]
+    },
+    {
+      "id": "business-design",
+      "output": "業務ルール・プロセス・組織・業務KPI",
+      "owner": "business-consultant",
+      "skills": [
+        "process-redesign",
+        "kpi-design"
+      ]
+    },
+    {
+      "id": "business-adoption",
+      "output": "業務教育・定着・業務UATシナリオ案",
+      "owner": "business-consultant",
+      "skills": [
+        "process-redesign"
+      ]
+    },
+    {
+      "id": "system-requirements",
+      "output": "業務要求からのシステム要件・受入条件・非機能配分",
+      "owner": "it-architect",
+      "skills": [
+        "requirements-definition"
+      ]
+    },
+    {
+      "id": "cross-domain-architecture",
+      "output": "全社・システム間・領域横断の原則、境界、ADR",
+      "owner": "it-architect",
+      "skills": [
+        "ea-design",
+        "tech-selection"
+      ]
+    },
+    {
+      "id": "cross-domain-security",
+      "output": "信頼境界・脅威・セキュリティ要件と各領域への配分",
+      "owner": "it-architect",
+      "skills": [
+        "ea-design",
+        "requirements-definition"
+      ]
+    },
+    {
+      "id": "cross-domain-verification",
+      "output": "システム横断の技術テスト設計・要件網羅と接続結果の整合確認",
+      "owner": "it-architect",
+      "skills": [
+        "requirements-definition",
+        "review-engineering-change"
+      ]
+    },
+    {
+      "id": "frontend-design",
+      "output": "情報設計・操作試作・ユーザビリティ評価と画面詳細設計",
+      "owner": "frontend-engineer",
+      "skills": [
+        "design-frontend-architecture"
+      ]
+    },
+    {
+      "id": "frontend-implementation",
+      "output": "画面・部品・クライアントAPI接続の実装",
+      "owner": "frontend-engineer",
+      "skills": [
+        "implement-accessible-ui",
+        "integrate-frontend-api"
+      ]
+    },
+    {
+      "id": "frontend-verification",
+      "output": "画面操作・ブラウザE2E・アクセシビリティ・表示性能の実行検証",
+      "owner": "frontend-engineer",
+      "skills": [
+        "test-frontend-behavior",
+        "optimize-frontend-performance"
+      ]
+    },
+    {
+      "id": "backend-contract",
+      "output": "サービス単位のAPI契約・エラー・互換性",
+      "owner": "backend-engineer",
+      "skills": [
+        "design-api-contracts"
+      ]
+    },
+    {
+      "id": "backend-implementation",
+      "output": "業務サービス・アプリ認可・物理DBとクエリ",
+      "owner": "backend-engineer",
+      "skills": [
+        "implement-domain-services",
+        "implement-backend-security",
+        "design-data-and-migrations"
+      ]
+    },
+    {
+      "id": "backend-verification",
+      "output": "API・DBの契約、認可、整合性、競合・処理性能の実行検証",
+      "owner": "backend-engineer",
+      "skills": [
+        "test-and-optimize-backend"
+      ]
+    },
+    {
+      "id": "data-migration",
+      "output": "変換・移行コード、データ照合とデータ復旧手順",
+      "owner": "backend-engineer",
+      "skills": [
+        "design-data-and-migrations"
+      ]
+    },
+    {
+      "id": "infrastructure-design",
+      "output": "原則に従う環境・ネットワーク・配置・基盤IAMの詳細設計",
+      "owner": "infrastructure-engineer",
+      "skills": [
+        "design-infrastructure",
+        "secure-cloud-platform"
+      ]
+    },
+    {
+      "id": "infrastructure-delivery",
+      "output": "IaC・CI/CD・環境設定・技術配備の実装と適用",
+      "owner": "infrastructure-engineer",
+      "skills": [
+        "implement-infrastructure-as-code",
+        "build-delivery-pipelines"
+      ]
+    },
+    {
+      "id": "infrastructure-verification",
+      "output": "基盤構成・到達性・権限・配備・隔離復元の実行検証",
+      "owner": "infrastructure-engineer",
+      "skills": [
+        "secure-cloud-platform",
+        "operate-and-recover-services"
+      ]
+    },
+    {
+      "id": "service-operations",
+      "output": "監視・容量・費用・バックアップ・障害初動と更新通知の運用",
+      "owner": "infrastructure-engineer",
+      "skills": [
+        "operate-and-recover-services"
+      ]
+    },
+    {
+      "id": "project-status",
+      "output": "進捗・費用・課題・変更・リスクの統合報告",
+      "owner": "pmo",
+      "skills": [
+        "project-status-report",
+        "risk-issue-management"
+      ]
+    },
+    {
+      "id": "project-quality",
+      "output": "全体品質計画・指標・証跡集約・終了判定材料",
+      "owner": "pmo",
+      "skills": [
+        "quality-management"
+      ]
+    },
+    {
+      "id": "cutover-coordination",
+      "output": "全体切替タイムチャート・依存順・Go/No-Go判断材料",
+      "owner": "pmo",
+      "skills": [
+        "cutover-planning"
+      ]
+    },
+    {
+      "id": "unknown-production-incident",
+      "output": "原因不明の本番障害の暫定初動・影響抑制調整",
+      "owner": "infrastructure-engineer",
+      "skills": [
+        "diagnose-engineering-failure",
+        "operate-and-recover-services"
+      ]
+    },
+    {
+      "id": "unknown-development-defect",
+      "output": "領域を特定できない非本番不具合の暫定調査",
+      "owner": "backend-engineer",
+      "skills": [
+        "diagnose-engineering-failure"
+      ]
+    }
+  ],
+  "shared_skills": [
+    "logical-thinking",
+    "desk-research",
+    "quantitative-analysis",
+    "storyline-builder",
+    "deliverable-review",
+    "drawio-diagram",
+    "consulting-pptx-skill",
+    "inspect-engineering-context",
+    "plan-engineering-change",
+    "review-engineering-change",
+    "diagnose-engineering-failure",
+    "handoff-engineering-work"
+  ],
+  "specialist_skills": {
+    "strategy-consultant": [
+      "environment-analysis",
+      "growth-strategy",
+      "business-plan"
+    ],
+    "business-consultant": [
+      "bpm-process-mapping",
+      "process-redesign",
+      "kpi-design",
+      "org-raci-design"
+    ],
+    "it-architect": [
+      "ea-design",
+      "requirements-definition",
+      "tech-selection"
+    ],
+    "pmo": [
+      "project-status-report",
+      "risk-issue-management",
+      "quality-management",
+      "cutover-planning"
+    ],
+    "frontend-engineer": [
+      "design-frontend-architecture",
+      "implement-accessible-ui",
+      "integrate-frontend-api",
+      "test-frontend-behavior",
+      "optimize-frontend-performance"
+    ],
+    "backend-engineer": [
+      "design-api-contracts",
+      "implement-domain-services",
+      "design-data-and-migrations",
+      "implement-backend-security",
+      "test-and-optimize-backend"
+    ],
+    "infrastructure-engineer": [
+      "design-infrastructure",
+      "implement-infrastructure-as-code",
+      "build-delivery-pipelines",
+      "secure-cloud-platform",
+      "operate-and-recover-services"
+    ]
+  },
+  "routing": {
+    "mixed_fallback": "it-architect",
+    "unknown_production": "infrastructure-engineer",
+    "unknown_development": "backend-engineer"
+  }
+}

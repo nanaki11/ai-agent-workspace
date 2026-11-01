@@ -8,13 +8,13 @@
       "name": "consulting-agents",
       "source": "./plugins/claude/consulting-agents",
       "description": "戦略・業務改革・IT・PMOとフロントエンド・バックエンド・インフラの7エージェント、40の共通／専門スキル",
-      "version": "1.4.0"
+      "version": "1.4.1"
     },
     {
       "name": "consulting-pptx-skill",
       "source": "./plugins/claude/consulting-pptx-skill",
       "description": "コンサル品質・経営会議品質のスライド（HTML 16:9→PDF）を作る単体スキル",
-      "version": "1.4.0"
+      "version": "1.4.1"
     }
   ]
 }

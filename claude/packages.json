@@ -8,7 +8,9 @@
       "claude_ai_plugin_id": "plugin_01EcZHLfyZYT5soDVCHmTwY8",
       "marketplace": "Organization library",
       "rules": [
-        "development-workflow.md"
+        "development-workflow.md",
+        "agent-responsibilities.md",
+        "agent-responsibilities.json"
       ],
       "skills": [
         "bpm-process-mapping",

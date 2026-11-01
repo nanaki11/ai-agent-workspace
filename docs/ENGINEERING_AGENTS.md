@@ -1,6 +1,6 @@
 # エンジニアエージェント
 
-更新日: 2026-11-01 JST / 配布版: 1.4.0
+更新日: 2026-11-01 JST / 配布版: 1.4.1
 
 ## 構成と呼び出し
 
@@ -49,3 +49,7 @@ GitHubへのマージとインストール済みプラグインの更新は別�
 - OpenAPI: https://spec.openapis.org/ （API契約の表現。利用ツールに対応する版を選ぶ）
 - WCAG: https://www.w3.org/TR/WCAG22/ （画面品質。自動検査だけで適合と断定しない）
 - SLSA: https://slsa.dev/spec/v1.2/ （成果物来歴。採用だけで認定・準拠を主張しない）
+
+## 1.4.1の責任分担
+
+ITの横断設計と各engineerの領域内詳細設計を分離。PMOの全体品質・切替計画と技術実行を区別する。責任表はcommon/rules/agent-responsibilities.md/json、変更理由と検証範囲は[MECEレビュー](AGENT_MECE_REVIEW.md)を参照。
