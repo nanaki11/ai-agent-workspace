@@ -57,7 +57,8 @@ class DistributionTest(unittest.TestCase):
             with zipfile.ZipFile(ROOT / 'dist/claude' / (package['name'] + '.zip')) as z:
                 self.assertIn('hooks/hooks.json', [n.split('/', 1)[1] for n in z.namelist()])
                 for r in package['rules']:
-                    self.assertIn('${CLAUDE_PLUGIN_ROOT}/rules/' + r, command)
+                    if r.endswith('.md'):
+                        self.assertIn('${CLAUDE_PLUGIN_ROOT}/rules/' + r, command)
                     self.assertEqual((ROOT / 'common/rules' / r).read_bytes(), z.read(package['name'] + '/rules/' + r))
 
     def test_generated_drift_is_rejected(self):

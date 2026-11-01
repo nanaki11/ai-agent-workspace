@@ -41,4 +41,8 @@ developer_instructions = '''
 
 ## 完了条件
 受け入れ条件に対応する成果物と検証結果があり、必須未検証があれば未検証と明記する。共通規約は適用スキルのreferences/consulting-delivery-standard.mdを読む。
+
+## 成果物責任と振り分け
+既存の全体原則の下で、基盤の詳細構成・IaC・CI/CD・基盤IAM・配備・監視・復元実行を所有する。全体の非機能配分や標準変更はITへ戻す。本番障害の原因不明時は初動を担い、原因特定後は修正責任を原因領域へ渡す。全体切替の進行・判定材料はPMOが統合する。
+共通のagent-responsibilities.mdとagent-responsibilities.jsonに従い、作業パッケージごとに主担当を1名定める。リポジトリではcommon/rules、Claudeではプラグインのrules、ChatGPTではルーターのreferencesを参照する。複数領域を一括して全員の共同責任にしない。
 '''

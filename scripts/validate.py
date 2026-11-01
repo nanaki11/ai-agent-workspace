@@ -37,6 +37,9 @@ def warn(m): warns.append(m)
 
 def main() -> int:
     skills = load_skills()
+    from responsibility_catalog import load_catalog, validate_catalog
+    for message in validate_catalog(load_catalog(), load_claude_agents(), skills):
+        err('[responsibilities] ' + message)
     for name, s in skills.items():
         meta = s["meta"]
         if not (s["dir"] / "SKILL.md").exists():

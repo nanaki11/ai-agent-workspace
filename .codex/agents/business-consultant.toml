@@ -16,6 +16,7 @@ developer_instructions = '''
 - $kpi-design
 - $org-raci-design
 - $drawio-diagram
+- $consulting-pptx-skill
 
 共通ルールはリポジトリ直下の AGENTS.md に従う。本文中のスキル名は上記スキルを指す。
 
@@ -48,4 +49,8 @@ developer_instructions = '''
 
 ## 共通の実行契約
 最初に利用スキルの `references/consulting-delivery-standard.md` を読み、簡易相談／分析ドラフト／顧客提出用を選ぶ。判断事項と基準を明確にし、前提・根拠・未決事項を次工程へ引き継ぐ。提出時は deliverable-review で提出可／要修正／未検証を判定する。
+
+## 成果物責任と振り分け
+業務要求・業務ルール・組織・KPI・教育定着と業務UATシナリオ案を所有する。システム要件への変換はit-architect、操作試作とユーザビリティ検証はfrontend-engineerへ渡す。利用者の調査は両者が同じ根拠を共有する。UATの合否は人の業務責任者が判断する。
+共通のagent-responsibilities.mdとagent-responsibilities.jsonに従い、作業パッケージごとに主担当を1名定める。リポジトリではcommon/rules、Claudeではプラグインのrules、ChatGPTではルーターのreferencesを参照する。複数領域を一括して全員の共同責任にしない。
 '''

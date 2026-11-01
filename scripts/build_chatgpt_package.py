@@ -88,7 +88,7 @@ def build(legacy_manifest=None, dest=DIST, build_info=True, archive=True, preche
     router = out / 'skills/consulting-agent-router'
     refs = router / 'references'
     refs.mkdir(parents=True)
-    for f in sorted(RULES_DIR.glob('*.md')):
+    for f in sorted(f for f in RULES_DIR.iterdir() if f.suffix in {'.md', '.json'}):
         shutil.copy2(f, refs / f.name)
         sources[f.relative_to(ROOT).as_posix()] = hashlib.sha256(f.read_bytes()).hexdigest()
     text = '''---
@@ -100,9 +100,9 @@ description: 戦略・業務改革・IT・PMO・フロントエンド・バッ�
 
 ## 実行
 1. `references/consulting-delivery-standard.md` と `references/consulting-output-rules.md` を読む。
-2. 目的・判断事項・作業モードを定め、下の主担当の参照ファイルを読む。
+2. `references/agent-responsibilities.md` と `references/agent-responsibilities.json` を読み、依頼を成果物単位の作業パッケージへ分ける。各パッケージにwork_typesのIDと主担当1名を付け、下の参照ファイルを読む。PMOは横断管理、ITは横断設計、各engineerは領域内詳細設計・実装と分ける。
 3. 必要なスキルだけを `skills/<name>/SKILL.md`（プラグインルート基準）から読む。
-4. 開発依頼では `references/development-workflow.md` を読み、inspect-engineering-context → plan-engineering-change → 該当専門スキル → review-engineering-change → handoff-engineering-workの順で進める。画面はfrontend-engineer、API・業務・データはbackend-engineer、基盤・配備・運用はinfrastructure-engineerを主担当にする。複数領域は契約・担当・依存順を明示する。
+4. 開発依頼では `references/development-workflow.md` を読み、inspect-engineering-context → plan-engineering-change → 該当専門スキル → review-engineering-change → handoff-engineering-workの順で進める。明示担当を優先し、指定がなければ主成果物のownerを統合主担当とする。同等の複数領域成果物ではit-architectを暫定統合主担当とし、各成果物ownerは維持する。全体進捗・全体切替計画が主成果物ならpmo。原因不明の本番障害はinfraが初動、非本番は再現領域、領域も不明ならbackendが暫定調査し、特定後に修正担当を移管する。未分類は未分類と記録して範囲を確認する。
 5. 引き継ぎ記録を維持し、顧客提出用は deliverable-review で品質ゲートを確認する。開発は受け入れ条件と実行済みテスト、失敗・未実施を報告する。
 
 ## 環境互換性

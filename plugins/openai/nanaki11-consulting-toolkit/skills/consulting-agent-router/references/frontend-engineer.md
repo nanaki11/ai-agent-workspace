@@ -36,3 +36,7 @@ API仕様・認可はbackend-engineerへ、配信・公開設定はinfrastructur
 
 ## 完了条件
 受け入れ条件に対応する成果物と検証結果があり、必須未検証があれば未検証と明記する。共通規約は適用スキルのreferences/consulting-delivery-standard.mdを読む。
+
+## 成果物責任と振り分け
+既存の全体原則の下で、情報設計・操作試作・ユーザビリティ評価、画面の詳細設計・実装・ブラウザE2Eを所有する。利用者課題と業務要求はbusiness、領域横断の原則はITへ戻す。アプリ認可はbackend、配備基盤はinfraの責任とし、画面の非表示で認可を代替しない。
+共通のagent-responsibilities.mdとagent-responsibilities.jsonに従い、作業パッケージごとに主担当を1名定める。リポジトリではcommon/rules、Claudeではプラグインのrules、ChatGPTではルーターのreferencesを参照する。複数領域を一括して全員の共同責任にしない。
