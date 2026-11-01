@@ -167,26 +167,46 @@
 | スキル | 用途（description の冒頭） |
 |---|---|
 | `bpm-process-mapping` | 業務を可視化するBPMスキル |
+| `build-delivery-pipelines` | CI/CD構築を行う |
 | `business-plan` | 中期経営計画・事業計画を作るスキル |
 | `consulting-pptx-skill` | コンサル品質・経営会議品質のスライド（HTML 16:9→PDF）を、約110項目の設計規約・62型パーツ集・機械チェックで作る |
 | `cutover-planning` | システムの移行と本番切り替えを計画するPMOスキル |
 | `deliverable-review` | 成果物の品質をチェックするスキル |
+| `design-api-contracts` | API契約設計を行う |
+| `design-data-and-migrations` | データと移行設計を行う |
+| `design-frontend-architecture` | フロントエンド構成設計を行う |
+| `design-infrastructure` | インフラ構成設計を行う |
 | `desk-research` | Web・IR資料・統計・業界レポートから情報を集め、出典付きで整理するリサーチスキル |
+| `diagnose-engineering-failure` | 開発障害の原因解析を行う |
 | `drawio-diagram` | draw.io（diagrams.net）形式の図を作るスキル |
 | `ea-design` | エンタープライズアーキテクチャ（EA）を設計するスキル |
 | `environment-analysis` | 戦略立案の前提となる現状分析スキル |
 | `growth-strategy` | 成長戦略・事業戦略の選択肢を作り、評価して選ぶスキル |
+| `handoff-engineering-work` | 開発作業の引き継ぎを行う |
+| `implement-accessible-ui` | アクセシブルなUI実装を行う |
+| `implement-backend-security` | バックエンド保護実装を行う |
+| `implement-domain-services` | 業務サービス実装を行う |
+| `implement-infrastructure-as-code` | IaC実装を行う |
+| `inspect-engineering-context` | 開発コンテキスト調査を行う |
+| `integrate-frontend-api` | 画面とAPIの接続を行う |
 | `kpi-design` | KPIを設計するスキル |
 | `logical-thinking` | 論点を構造化し仮説を立てる思考スキル |
+| `operate-and-recover-services` | 監視と復旧運用を行う |
+| `optimize-frontend-performance` | フロントエンド性能改善を行う |
 | `org-raci-design` | 組織と役割分担を設計するスキル |
+| `plan-engineering-change` | 開発変更計画を行う |
 | `process-redesign` | 業務課題を分析し、To-Be業務を設計するスキル |
 | `project-status-report` | プロジェクトの状況を数字で把握して報告するPMOスキル |
 | `quality-management` | システム開発の品質を管理するPMOスキル |
 | `quantitative-analysis` | 数字で判断材料を作るスキル |
 | `requirements-definition` | システムの要件を定義するスキル |
+| `review-engineering-change` | 開発差分レビューを行う |
 | `risk-issue-management` | 課題・リスク・変更を管理するPMOスキル |
+| `secure-cloud-platform` | 基盤セキュリティ実装を行う |
 | `storyline-builder` | 分析結果を、経営層に伝わるストーリーラインとスライド骨子（空パック）に組み立てるスキル |
 | `tech-selection` | 技術・製品・ベンダーを選び、判断を記録するスキル |
+| `test-and-optimize-backend` | バックエンド検証と性能改善を行う |
+| `test-frontend-behavior` | 画面動作テストを行う |
 
 ### Claude 固有の記法の読み替え（Codex / ChatGPT で使うとき）
 
@@ -202,11 +222,14 @@
 ## 3. 専門家エージェント
 
 Claude ではサブエージェント（`claude/plugins/consulting-agents/agents/`）、Codex ではカスタムエージェント（`.codex/agents/*.toml`、生成物）として定義している。
-ChatGPT／Codex のプラグイン（`plugins/openai/`）では `consulting-agent-router` スキルが4役割を振り分ける。
+ChatGPT／Codex のプラグイン（`plugins/openai/`）では `consulting-agent-router` スキルが7役割を振り分ける。
 
 | エージェント | 役割 | 使うスキル |
 |---|---|---|
+| `backend-engineer` | バックエンドエンジニア | `inspect-engineering-context`, `plan-engineering-change`, `review-engineering-change`, `diagnose-engineering-failure`, `handoff-engineering-work`, `design-api-contracts`, `implement-domain-services`, `design-data-and-migrations`, `implement-backend-security`, `test-and-optimize-backend` |
 | `business-consultant` | ビジネス（業務改革）コンサルタント | `logical-thinking`, `desk-research`, `quantitative-analysis`, `storyline-builder`, `deliverable-review`, `bpm-process-mapping`, `process-redesign`, `kpi-design`, `org-raci-design`, `drawio-diagram` |
+| `frontend-engineer` | フロントエンドエンジニア | `inspect-engineering-context`, `plan-engineering-change`, `review-engineering-change`, `diagnose-engineering-failure`, `handoff-engineering-work`, `design-frontend-architecture`, `implement-accessible-ui`, `integrate-frontend-api`, `test-frontend-behavior`, `optimize-frontend-performance` |
+| `infrastructure-engineer` | インフラエンジニア | `inspect-engineering-context`, `plan-engineering-change`, `review-engineering-change`, `diagnose-engineering-failure`, `handoff-engineering-work`, `design-infrastructure`, `implement-infrastructure-as-code`, `build-delivery-pipelines`, `secure-cloud-platform`, `operate-and-recover-services` |
 | `it-architect` | ITアーキテクト | `logical-thinking`, `desk-research`, `quantitative-analysis`, `storyline-builder`, `deliverable-review`, `drawio-diagram`, `ea-design`, `requirements-definition`, `tech-selection` |
 | `pmo` | PMO（プロジェクトマネジメントオフィス） | `logical-thinking`, `quantitative-analysis`, `storyline-builder`, `deliverable-review`, `project-status-report`, `risk-issue-management`, `quality-management`, `cutover-planning` |
 | `strategy-consultant` | 戦略コンサルタント | `logical-thinking`, `desk-research`, `quantitative-analysis`, `storyline-builder`, `deliverable-review`, `environment-analysis`, `growth-strategy`, `business-plan` |

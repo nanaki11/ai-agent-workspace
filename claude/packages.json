@@ -30,7 +30,27 @@
         "requirements-definition",
         "risk-issue-management",
         "storyline-builder",
-        "tech-selection"
+        "tech-selection",
+        "design-frontend-architecture",
+        "implement-accessible-ui",
+        "integrate-frontend-api",
+        "test-frontend-behavior",
+        "optimize-frontend-performance",
+        "design-api-contracts",
+        "implement-domain-services",
+        "design-data-and-migrations",
+        "implement-backend-security",
+        "test-and-optimize-backend",
+        "design-infrastructure",
+        "implement-infrastructure-as-code",
+        "build-delivery-pipelines",
+        "secure-cloud-platform",
+        "operate-and-recover-services",
+        "inspect-engineering-context",
+        "plan-engineering-change",
+        "review-engineering-change",
+        "diagnose-engineering-failure",
+        "handoff-engineering-work"
       ]
     },
     {

@@ -52,16 +52,17 @@ def build(legacy_manifest=None, dest=DIST, build_info=True, archive=True, preche
     if precheck:
         subprocess.run([sys.executable, str(ROOT / 'scripts/generate.py'), '--check'], check=True)
     version = read_version()
+    skill_count, agent_count = len(load_skills()), len(load_claude_agents())
     out = dest / NAME
     if out.exists():
         shutil.rmtree(out)
     (out / '.codex-plugin').mkdir(parents=True)
     manifest = {
         'name': NAME, 'version': version, 'skills': './skills/',
-        'description': '21のコンサルティングスキルの全文・資源と4つの専門家役割。GitHubを正本とする。',
+        'description': f'{skill_count}のコンサルティング・開発スキルの全文・資源と{agent_count}つの専門家役割。GitHubを正本とする。',
         'interface': {
             'displayName': 'Consulting Toolkit (nanaki11)',
-            'shortDescription': '戦略・業務改革・IT・PMOの分析と提出前検証',
+            'shortDescription': '戦略・業務改革・IT・PMO・アプリ開発と品質検証',
             'longDescription': 'スキル原本を要約せず同梱し、判断事項、根拠、引き継ぎ、品質ゲートを共通化。外部スライド資源と実行ツールは別途必要。',
             'category': 'Productivity', 'capabilities': ['Research', 'Analysis', 'Documents']}}
     if legacy_manifest is not None:
@@ -75,7 +76,7 @@ def build(legacy_manifest=None, dest=DIST, build_info=True, archive=True, preche
     (out / 'README.md').write_text(
         '# Consulting Toolkit\n'
         'Source: https://github.com/nanaki11/ai-agent-workspace\n'
-        'Includes 21 full skill definitions, their repository-owned resources, and four expert roles through a router.\n'
+        f'Includes {skill_count} full skill definitions, their repository-owned resources, and {agent_count} expert roles through a router.\n'
         'External slide-generation dependencies and provider tools are not bundled. See SOURCE_MANIFEST.json for source hashes.\n')
     sources = {}
     for name, skill in load_skills().items():
@@ -92,7 +93,7 @@ def build(legacy_manifest=None, dest=DIST, build_info=True, archive=True, preche
         sources[f.relative_to(ROOT).as_posix()] = hashlib.sha256(f.read_bytes()).hexdigest()
     text = '''---
 name: consulting-agent-router
-description: 戦略・業務改革・IT・PMOの依頼に主担当と必要なスキルを選び、判断と根拠を引き継いで品質を検証する。
+description: 戦略・業務改革・IT・PMO・フロントエンド・バックエンド・インフラの依頼に主担当と必要なスキルを選び、実装・検証・引き継ぎまで進める。エンジニアとして開発・修正・障害対応するときにも使用する。
 ---
 
 # Consulting agent router
@@ -101,7 +102,8 @@ description: 戦略・業務改革・IT・PMOの依頼に主担当と必要な�
 1. `references/consulting-delivery-standard.md` と `references/consulting-output-rules.md` を読む。
 2. 目的・判断事項・作業モードを定め、下の主担当の参照ファイルを読む。
 3. 必要なスキルだけを `skills/<name>/SKILL.md`（プラグインルート基準）から読む。
-4. 引き継ぎ記録を維持し、顧客提出用は deliverable-review で品質ゲートを確認する。
+4. 開発依頼では `references/development-workflow.md` を読み、inspect-engineering-context → plan-engineering-change → 該当専門スキル → review-engineering-change → handoff-engineering-workの順で進める。画面はfrontend-engineer、API・業務・データはbackend-engineer、基盤・配備・運用はinfrastructure-engineerを主担当にする。複数領域は契約・担当・依存順を明示する。
+5. 引き継ぎ記録を維持し、顧客提出用は deliverable-review で品質ゲートを確認する。開発は受け入れ条件と実行済みテスト、失敗・未実施を報告する。
 
 ## 環境互換性
 - 同梱する全文を使う。GitHubへの毎回の再取得は必須にしない。SOURCE_MANIFEST.jsonで版とハッシュを確認する。

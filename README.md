@@ -1,6 +1,6 @@
 # ai-agent-workspace
 
-Claude・ChatGPT・Codex で使うコンサルティング用スキル（21件）とエージェント（4件）を、GitHub を正本として**双方向に同期**するためのリポジトリ。
+Claude・ChatGPT・Codex で使うコンサルティング・エンジニアリング用スキル（41件）とエージェント（7件）を、GitHub を正本として**双方向に同期**するためのリポジトリ。
 
 - どの環境で改善したスキルも、GitHub に取り込んで他の環境へ再インストールできる。
 - 変更の向き（どちらが新しいか）は `scripts/sync.py` が前回同期時点の記録（`sync/state.json`）と比べて判定する。
@@ -19,18 +19,18 @@ Claude・ChatGPT・Codex で使うコンサルティング用スキル（21件�
 ```
 .
 ├── VERSION                         # ★配布版の番号（配布内容を変えたら上げる）
-├── .agents/skills/<name>/          # ★スキルの正本（21件）。Codex はこのまま検出する
+├── .agents/skills/<name>/          # ★スキルの正本（41件）。Codex はこのまま検出する
 ├── claude/
 │   ├── packages.json               # ★Claude 側の配布単位
 │   └── plugins/consulting-agents/
 │       ├── .claude-plugin/plugin.json
-│       └── agents/*.md             # ★エージェントの正本（4件）
+│       └── agents/*.md             # ★エージェントの正本（7件）
 ├── common/rules/                   # ★共通ルールの正本（development-workflow.md は開発の共通ルール）
 ├── sync/state.json                 # 環境ごとの「前回同期時点」のハッシュ（sync.py が更新）
 ├── plugins/                        # 生成物：配布用プラグイン（Git 管理＝GitHub から直接インストール可）
-│   ├── claude/consulting-agents/   #   Claude（20スキル＋4エージェント）
+│   ├── claude/consulting-agents/   #   Claude（40スキル＋7エージェント）
 │   ├── claude/consulting-pptx-skill/
-│   └── openai/nanaki11-consulting-toolkit/  # ChatGPT／Codex（21スキル＋役割ルーター）
+│   └── openai/nanaki11-consulting-toolkit/  # ChatGPT／Codex（41スキル＋役割ルーター）
 ├── .claude-plugin/marketplace.json # 生成物：Claude Code のマーケットプレイス定義
 ├── .agents/plugins/marketplace.json# 生成物：ChatGPT／Codex のマーケットプレイス定義
 ├── AGENTS.md, .codex/agents/       # 生成物：Codex 用の共通指示とカスタムエージェント
@@ -123,3 +123,9 @@ claude.ai の「組織設定 → Claude Code → Managed settings」（Owner 権
 - MCP の認証情報は環境変数かローカル設定に置く（`mcp/.env.example`）。
 
 参考：[docs/INVENTORY.md](docs/INVENTORY.md)（初回の棚卸し）、[docs/MIGRATION_REPORT.md](docs/MIGRATION_REPORT.md)
+
+## エンジニアエージェント（1.4.0）
+
+フロントエンド・バックエンド・インフラの3役割と専門15・共通5スキルを追加。既存の役割・スキルは継続利用できる。
+ChatGPTではConsulting Toolkitに「バックエンドエンジニアとしてAPIを実装して」などと依頼する。
+責任分担・スキル一覧・ホストごとの違いは [エンジニア設計](docs/ENGINEERING_AGENTS.md) を参照。
